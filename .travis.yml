@@ -1,10 +1,12 @@
 sudo: required
 
+language: go
+
 services:
   - docker
 
 install:
-- docker build brint/docker-box .
+- docker build -t brint/docker-box .
 
 script:
 - docker run brint/docker-box go
