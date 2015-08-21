@@ -1,0 +1,14 @@
+sudo: required
+
+services:
+  - docker
+
+install:
+- docker build brint/docker-box .
+
+script:
+- docker run brint/docker-box go
+- docker run brint/docker-box docker
+- docker run brint/docker-box docker-machine
+- docker run brint/docker-box docker-compose
+- docker run brint/docker-box swarm
