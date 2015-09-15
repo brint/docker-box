@@ -12,10 +12,10 @@ RUN apt-get install -y git vim curl wget
 # Install docker
 RUN wget -qO- https://get.docker.com/ | sh
 
-# Install go 1.5
-RUN wget https://storage.googleapis.com/golang/go1.5.linux-amd64.tar.gz
-RUN tar -C /usr/local -xzf go1.5.linux-amd64.tar.gz
-RUN rm -rf go1.5.linux-amd64.tar.gz
+# Install go 1.5.1
+RUN wget https://storage.googleapis.com/golang/go1.5.1.linux-amd64.tar.gz
+RUN tar -C /usr/local -xzf go1.5.1.linux-amd64.tar.gz
+RUN rm -rf go1.5.1.linux-amd64.tar.gz
 
 # Add shell user, setup user go environment
 RUN useradd -m user

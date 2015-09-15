@@ -6,8 +6,8 @@ docker-box
 
 This is a simple container that has most of of the docker tools that people use for demonstration purposes. This container includes:
 
-- golang 1.5
-- docker 1.8.1
+- golang 1.5.1
+- docker 1.8.2
 - swarm 0.5.0-dev
 - docker-machine 0.4.1
 - docker-compose 1.4.0
