@@ -12,7 +12,7 @@ RUN echo "Acquire::http {No-Cache=True;};" > /etc/apt/apt.conf.d/no-cache
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update -qq
 RUN apt-get upgrade -yqq
-RUN apt-get install -yqq git curl wget
+RUN apt-get install -yqq git curl wget unzip
 
 # Install docker
 RUN wget -qO- https://get.docker.com/ | sh
@@ -39,11 +39,14 @@ RUN echo "export PATH=$PATH:/usr/local/go/bin:/home/user/go/bin" >> /home/user/.
 RUN su user -c "source /home/user/.profile; go get github.com/tools/godep"
 
 # Install docker-machine
-RUN curl -sL https://github.com/docker/machine/releases/download/v0.4.1/docker-machine_linux-amd64 > /usr/local/bin/docker-machine
+RUN curl -L https://github.com/docker/machine/releases/download/v0.5.0/docker-machine_linux-amd64.zip >machine.zip && \
+    unzip machine.zip && \
+    rm machine.zip && \
+    mv docker-machine* /usr/local/bin
 RUN chmod +x /usr/local/bin/docker-machine
 
 # Install docker-compose
-RUN curl -sL https://github.com/docker/compose/releases/download/1.4.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+RUN curl -sL https://github.com/docker/compose/releases/download/1.5.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 RUN chmod +x /usr/local/bin/docker-compose
 
 # Install swarm
