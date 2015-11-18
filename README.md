@@ -9,8 +9,8 @@ This is a simple container that has most of of the docker tools that people use 
 - golang 1.5.1
 - docker 1.9.0
 - swarm 1.0.0-HEAD
-- docker-machine 0.5.0
-- docker-compose 1.5.0
+- docker-machine 0.5.1
+- docker-compose 1.5.1
 
 #### Building the container
 This assumes that you already have docker up and running and your environment variables are set appropriately.
