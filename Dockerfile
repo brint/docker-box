@@ -18,9 +18,9 @@ RUN apt-get install -yqq git curl wget unzip
 RUN wget -qO- https://get.docker.com/ | sh
 
 # Install go
-RUN wget -q https://storage.googleapis.com/golang/go1.5.2.linux-amd64.tar.gz
-RUN tar -C /usr/local -xzf go1.5.2.linux-amd64.tar.gz
-RUN rm -rf go1.5.2.linux-amd64.tar.gz
+RUN wget -q https://storage.googleapis.com/golang/go1.5.3.linux-amd64.tar.gz
+RUN tar -C /usr/local -xzf go1.5.3.linux-amd64.tar.gz
+RUN rm -rf go1.5.3.linux-amd64.tar.gz
 
 # Add shell user, setup user go environment
 RUN useradd -m user
@@ -39,15 +39,12 @@ RUN echo "export PATH=$PATH:/usr/local/go/bin:/home/user/go/bin" >> /home/user/.
 RUN su user -c "source /home/user/.profile; go get github.com/tools/godep"
 
 # Install docker-machine
-RUN curl -L https://github.com/docker/machine/releases/download/v0.5.2/docker-machine_linux-amd64.zip >machine.zip && \
-    unzip machine.zip && \
-    rm machine.zip && \
-    mv docker-machine* /usr/local/bin
-RUN chmod +x /usr/local/bin/docker-machine
+RUN curl -L https://github.com/docker/machine/releases/download/v0.6.0/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine && \
+  chmod +x /usr/local/bin/docker-machine
 
 # Install docker-compose
-RUN curl -sL https://github.com/docker/compose/releases/download/1.5.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-RUN chmod +x /usr/local/bin/docker-compose
+RUN curl -L https://github.com/docker/compose/releases/download/1.6.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose && \
+  chmod +x /usr/local/bin/docker-compose
 
 # Clean up
 RUN apt-get purge -y man
