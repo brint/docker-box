@@ -18,9 +18,9 @@ RUN apt-get install -yqq git curl wget unzip
 RUN wget -qO- https://get.docker.com/ | sh
 
 # Install go
-RUN wget -q https://storage.googleapis.com/golang/go1.5.3.linux-amd64.tar.gz
-RUN tar -C /usr/local -xzf go1.5.3.linux-amd64.tar.gz
-RUN rm -rf go1.5.3.linux-amd64.tar.gz
+RUN wget -q https://storage.googleapis.com/golang/go1.6.linux-amd64.tar.gz
+RUN tar -C /usr/local -xzf go1.6.linux-amd64.tar.gz
+RUN rm -rf go1.6.linux-amd64.tar.gz
 
 # Add shell user, setup user go environment
 RUN useradd -m user
