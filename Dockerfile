@@ -12,7 +12,7 @@ WORKDIR /home/user
 RUN apk add --update --repository http://dl-1.alpinelinux.org/alpine/edge/community/ tini docker
 
 # Install docker-machine
-RUN curl -L https://github.com/docker/machine/releases/download/v0.6.0/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine && \
+RUN curl -sL https://github.com/docker/machine/releases/download/v0.6.0/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine && \
   chmod +x /usr/local/bin/docker-machine
 
 # Install docker-compose
