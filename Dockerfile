@@ -1,61 +1,25 @@
-FROM ubuntu:trusty
+FROM alpine:3.3
 MAINTAINER Brint O'Hearn <brint.ohearn@rackspace.com>
 
 WORKDIR /root
 
-# Update packages
-# Next four lines come from https://gist.github.com/jpetazzo/6127116
-# this forces dpkg not to call sync() after package extraction and speeds up install
-RUN echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/02apt-speedup
-# we don't need and apt cache in a container
-RUN echo "Acquire::http {No-Cache=True;};" > /etc/apt/apt.conf.d/no-cache
-ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update -qq
-RUN apt-get upgrade -yqq
-RUN apt-get install -yqq git curl wget unzip
+RUN apk update && apk upgrade && apk add --no-cache bash curl
+
+RUN adduser -D -s /bin/bash user
+WORKDIR /home/user
 
 # Install docker
-RUN wget -qO- https://get.docker.com/ | sh
-
-# Install go
-RUN wget -q https://storage.googleapis.com/golang/go1.6.linux-amd64.tar.gz
-RUN tar -C /usr/local -xzf go1.6.linux-amd64.tar.gz
-RUN rm -rf go1.6.linux-amd64.tar.gz
-
-# Add shell user, setup user go environment
-RUN useradd -m user
-WORKDIR /home/user
-RUN mkdir /home/user/go
-RUN chown user:user /home/user/go
-RUN su user -c "mkdir -p /home/user/machines"
-
-ENV GOPATH /home/user/go
-ENV PATH $PATH:/usr/local/go/bin:/home/user/go/bin
-
-RUN echo "export GOPATH=/home/user/go" >> /home/user/.profile
-RUN echo "export PATH=$PATH:/usr/local/go/bin:/home/user/go/bin" >> /home/user/.profile
-
-# Install godep
-RUN su user -c "source /home/user/.profile; go get github.com/tools/godep"
+RUN apk add --update --repository http://dl-1.alpinelinux.org/alpine/edge/community/ tini docker
 
 # Install docker-machine
 RUN curl -L https://github.com/docker/machine/releases/download/v0.6.0/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine && \
   chmod +x /usr/local/bin/docker-machine
 
 # Install docker-compose
-RUN curl -L https://github.com/docker/compose/releases/download/1.6.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose && \
-  chmod +x /usr/local/bin/docker-compose
-
-# Clean up
-RUN apt-get purge -y man
-RUN apt-get clean autoclean
-RUN apt-get autoremove -y
-RUN rm -rf /home/user/go/pkg/*
-RUN rm -rf /home/user/go/src/*
-RUN rm -rf /usr/local/go/doc/*
-RUN rm -rf /usr/local/go/pkg/*
-RUN rm -rf /usr/local/go/src/*
-RUN rm -rf /var/lib/{apt,dpkg,cache,log}/
+ENV DOCKER_COMPOSE_VERSION 1.6.0
+RUN apk --update add py-pip py-yaml &&\
+    pip install -U docker-compose==${DOCKER_COMPOSE_VERSION} &&\
+    rm -rf `find / -regex '.*\.py[co]' -or -name apk`
 
 WORKDIR /home/user
 USER user
