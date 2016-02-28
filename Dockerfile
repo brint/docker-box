@@ -16,7 +16,7 @@ RUN curl -sL https://github.com/docker/machine/releases/download/v0.6.0/docker-m
   chmod +x /usr/local/bin/docker-machine
 
 # Install docker-compose
-ENV DOCKER_COMPOSE_VERSION 1.6.0
+ENV DOCKER_COMPOSE_VERSION 1.6.2
 RUN apk --update add py-pip py-yaml &&\
     pip install -U docker-compose==${DOCKER_COMPOSE_VERSION} &&\
     rm -rf `find / -regex '.*\.py[co]' -or -name apk`
