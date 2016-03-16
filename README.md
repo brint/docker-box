@@ -6,7 +6,7 @@ docker-box
 
 This is a simple container that has most of of the docker tools that people use for demonstration purposes. This container includes:
 
-- docker 1.10.2
+- docker 1.10.3
 - docker-machine 0.6.0
 - docker-compose 1.6.2
 
