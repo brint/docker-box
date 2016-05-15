@@ -3,7 +3,7 @@ sudo: required
 language: go
 
 services:
-  - docker
+- docker
 
 install:
 - docker build -t brint/docker-box .
