@@ -10,7 +10,7 @@ This is a simple container that has most of of the docker tools that people use 
 - docker-machine 0.8.1
 - docker-compose 1.8.0
 
-#### Building the container
+#### Download the container
 This assumes that you already have docker up and running and your environment variables are set appropriately.
 
 Pull it down from Docker Hub:
@@ -18,7 +18,8 @@ Pull it down from Docker Hub:
 docker pull brint/docker-box
 ```
 
-Build your own:
+#### Building the container
+Clone down and build your own:
 ```
 git clone https://github.com/brint/docker-box
 cd docker-box
@@ -31,3 +32,6 @@ This container is meant to be run as a shell.
 ```
 docker run -it brint/docker-box
 ```
+
+#### Development
+Make a feature/bug branch and make a PR back. `build.sh` is included to build the container and perform the tests done in Travis locally.
