@@ -6,9 +6,9 @@ docker-box
 
 This is a simple container that has most of of the docker tools that people use for demonstration purposes. This container includes:
 
-- docker 1.12.1
-- docker-machine 0.8.1
-- docker-compose 1.8.0
+- docker 1.12.3
+- docker-machine 0.8.2
+- docker-compose 1.9.0
 
 #### Download the container
 This assumes that you already have docker up and running and your environment variables are set appropriately.

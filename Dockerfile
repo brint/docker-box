@@ -1,8 +1,8 @@
 FROM alpine:3.4
 MAINTAINER Brint O'Hearn <brint.ohearn@rackspace.com>
 
-ENV DOCKER_COMPOSE_VERSION 1.8.0
-ENV DOCKER_MACHINE_VERSION 0.8.1
+ENV DOCKER_COMPOSE_VERSION 1.9.0
+ENV DOCKER_MACHINE_VERSION 0.8.2
 
 RUN apk update && apk upgrade && apk add --no-cache bash curl && \
   adduser -D -s /bin/bash user && \
